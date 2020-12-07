@@ -1,55 +1,64 @@
-package Organization;
+import org.sql2o.Connection;
 
-import java.util.Objects;
+import java.util.List;
 
 public class User {
-    private int id;
-    private  String name;
+    private String fName;
+    private String sName;
     private String position;
-    private String staff_role;
-
-
-    public User(String name, String position, String staff_role) {
-        this.name = name;
+    private String department;
+    private int id;
+    public User(String fName, String sName, String position, String department){
+        this.fName = fName;
+        this.sName = sName;
         this.position = position;
-        this.staff_role = staff_role;
-
+        this.department = department;
     }
 
-    public int getId() {
-        return id;
+    public String getFName() {
+        return fName;
     }
 
-    public String getName() {
-        return name;
+    public String getSName() {
+        return sName;
     }
 
     public String getPosition() {
         return position;
     }
 
-    public String getStaff_role() {
-        return staff_role;
+    public String getDepartment() {
+        return department;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
+    public void save() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO users (fName, sName, position, department) VALUES (:fName, :sName, :position, :department)";
+            this.id= (int) con.createQuery(sql, true)
+                    .addParameter("fName", this.fName)
+                    .addParameter("sName", this.sName)
+                    .addParameter("position", this.position)
+                    .addParameter("department", this.department)
+                    .executeUpdate()
+                    .getKey();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User users = (User) o;
-        return id == users.id &&
-                Objects.equals(name, users.name) &&
-                Objects.equals(position, users.position) &&
-                Objects.equals(staff_role, users.staff_role) ;
-
+        }
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, position, staff_role);
+    public static List<User> all() {
+        String sql = "SELECT * FROM users";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(User.class);
+        }
+    }
+    public static User find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM users where id=:id";
+            User user = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(User.class);
+            return user;
+        }
     }
 }

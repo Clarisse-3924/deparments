@@ -1,25 +1,34 @@
 package Organization;
 
-public class NewsDepartment  extends News {
 
-        private String news_type;
-        private int department_id;
-        private final String TYPE_OF_NEWS="department";
+import org.sql2o.Connection;
+
+import java.util.List;
 
 
-        public NewsDepartment(String title, String description,int department_id, int user_id) {
-            super(title, description, user_id);
-            this.department_id = department_id;
-            this.news_type=TYPE_OF_NEWS;
-        }
+public class NewsDepartment extends News {
+    public static final String DATABASE_TYPE = "Department";
 
-        @Override
-        public String getNews_type() {
-            return news_type;
-        }
-
-        @Override
-        public int getDepartment_id() {
-            return department_id;
+    public NewsDepartment(String title, String content, String dName){
+        this.title = title;
+        this.content = content;
+        this.dName = dName;
+        type = DATABASE_TYPE;
+    }
+    public static List<NewsDepartment> all() {
+        String sql = "SELECT * FROM news WHERE type='Department';";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(NewsDepartment.class);
         }
     }
+    public static NewsDepartment find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM news where id=:id";
+            NewsDepartment news = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetchFirst(NewsDepartment.class);
+            return news;
+        }
+    }
+}

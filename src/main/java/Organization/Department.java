@@ -1,56 +1,88 @@
 package Organization;
 
-import java.util.Objects;
+
+import org.eclipse.jetty.server.Authentication;
+import org.sql2o.Connection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Department {
-        private String name;
-        private String description;
-        private int id;
-        private int size;
+    private String dName;
+    private String description;
+    private int employeeNo;
+    private int id;
+    public Department(String dName, String description, int employeeNo){
+        this.dName = dName;
+        this.description = description;
+        this.employeeNo = employeeNo;
+    }
 
+    public String getDName() {
+        return dName;
+    }
 
+    public String getDescription() {
+        return description;
+    }
 
-        public Department(String name, String description) {
-            this.name = name;
-            this.description = description;
-            this.size=0;
+    public int getEmployeeNo() {
+        return employeeNo;
+    }
+    public int getId() {
+        return id;
+    }
+    public void save() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO departments (dName, description, employeeNo) VALUES (:dName, :description, :employeeNo)";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("dName", this.dName)
+                    .addParameter("description", this.description)
+                    .addParameter("employeeNo", this.employeeNo)
+                    .executeUpdate()
+                    .getKey();
         }
-        public String getDescription() {
-            return description;
+    }
+    public static List<Department> all() {
+        String sql = "SELECT * FROM departments";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Department.class);
+        }
+    }
+    public static Department find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM departments where id=:id";
+            Department department = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Department.class);
+            return department;
+        }
+    }
+    public List<Authentication.User> getUsers() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM users where department=:dName";
+            return con.createQuery(sql)
+                    .addParameter("dName", this.dName)
+                    .executeAndFetch(Authentication.User.class);
+        }
+    }
+    public List<Object> getNews() {
+        List<Object> allNews = new ArrayList<Object>();
+
+        try(Connection con = DB.sql2o.open()) {
+            String sqlGeneral = "SELECT * FROM news where dName=:dName AND type='General';";
+            List<GeneralNews> generalNews = con.createQuery(sqlGeneral)
+                    .addParameter("dName", this.dName)
+                    .executeAndFetch(GeneralNews.class);
+            allNews.addAll(generalNews);
+
+            String sqlDept = "SELECT * FROM news news where dName=:dName AND type='Department';";
+            List<NewsDepartment > departmentNews = con.createQuery(sqlDept)
+                    .addParameter("dName", this.dName)
+                    .executeAndFetch(NewsDepartment .class);
+            allNews.addAll(departmentNews);
         }
 
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Department that = (Department) o;
-            return id == that.id &&
-                    Objects.equals(name, that.name);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name, id);
-        }
+        return allNews;
+    }
 }
