@@ -33,7 +33,7 @@ public class Department {
         return id;
     }
     public void save() {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "INSERT INTO departments (dName, description, employeeNo) VALUES (:dName, :description, :employeeNo)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("dName", this.dName)
@@ -45,12 +45,12 @@ public class Department {
     }
     public static List<Department> all() {
         String sql = "SELECT * FROM departments";
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Department.class);
         }
     }
     public static Department find(int id) {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "SELECT * FROM departments where id=:id";
             Department department = con.createQuery(sql)
                     .addParameter("id", id)
@@ -59,7 +59,7 @@ public class Department {
         }
     }
     public List<Authentication.User> getUsers() {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "SELECT * FROM users where department=:dName";
             return con.createQuery(sql)
                     .addParameter("dName", this.dName)
@@ -69,7 +69,7 @@ public class Department {
     public List<Object> getNews() {
         List<Object> allNews = new ArrayList<Object>();
 
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sqlGeneral = "SELECT * FROM news where dName=:dName AND type='General';";
             List<GeneralNews> generalNews = con.createQuery(sqlGeneral)
                     .addParameter("dName", this.dName)

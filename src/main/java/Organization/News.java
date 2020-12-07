@@ -1,9 +1,11 @@
+package Organization;
+
 import org.sql2o.Connection;
 
-public abstract class News {
+public abstract class News  {
     public String title;
     public String content;
-    public String dName;
+    public String DepartmentName ;
     public int id;
     public String type;
 
@@ -15,19 +17,19 @@ public abstract class News {
         return content;
     }
 
-    public String getDName() {
-        return dName;
+    public String getDepartmentName () {
+        return DepartmentName ;
     }
     public int getId() {
         return id;
     }
     public void save() {
-        try(Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO news (title, content,dName, type) VALUES (:title, :content, :dName, :type)";
+        try(Connection con = Database.sql2o.open()) {
+            String sql = "INSERT INTO news (title, content,departmentName , type) VALUES (:title, :content, :departmentName, :type)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("title", this.title)
                     .addParameter("content", this.content)
-                    .addParameter("dName", this.dName)
+                    .addParameter("departmentName ", this.DepartmentName )
                     .addParameter("type", this.type)
                     .executeUpdate()
                     .getKey();

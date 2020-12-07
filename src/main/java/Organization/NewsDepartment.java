@@ -17,12 +17,12 @@ public class NewsDepartment extends News {
     }
     public static List<NewsDepartment> all() {
         String sql = "SELECT * FROM news WHERE type='Department';";
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             return con.createQuery(sql).throwOnMappingFailure(false).executeAndFetch(NewsDepartment.class);
         }
     }
     public static NewsDepartment find(int id) {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "SELECT * FROM news where id=:id";
             NewsDepartment news = con.createQuery(sql)
                     .addParameter("id", id)

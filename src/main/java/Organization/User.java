@@ -1,3 +1,5 @@
+package Organization;
+
 import org.sql2o.Connection;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public class User {
         return id;
     }
     public void save() {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "INSERT INTO users (fName, sName, position, department) VALUES (:fName, :sName, :position, :department)";
             this.id= (int) con.createQuery(sql, true)
                     .addParameter("fName", this.fName)
@@ -48,12 +50,12 @@ public class User {
     }
     public static List<User> all() {
         String sql = "SELECT * FROM users";
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(User.class);
         }
     }
     public static User find(int id) {
-        try(Connection con = DB.sql2o.open()) {
+        try(Connection con = Database.sql2o.open()) {
             String sql = "SELECT * FROM users where id=:id";
             User user = con.createQuery(sql)
                     .addParameter("id", id)

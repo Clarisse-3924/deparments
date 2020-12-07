@@ -1,3 +1,7 @@
+import Organization.Department;
+import Organization.GeneralNews;
+import Organization.NewsDepartment;
+import Organization.User;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -27,7 +31,7 @@ public class App {
 //        create a new user form
         get("/user/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
+            List<Department> departments = Department.all();
             model.put("departments", departments);
             return new ModelAndView(model, "newUser-form.hbs");
         }, new HandlebarsTemplateEngine());
@@ -38,7 +42,7 @@ public class App {
             String sName = request.queryParams("sName");
             String position = request.queryParams("position");
             String department = request.queryParams("department");
-            Users newUser = new Users(fName,sName,position,department);
+            User newUser = new User(fName,sName,position,department);
             model.put("user", newUser);
             newUser.save();
             return new ModelAndView(model, "success.hbs");
@@ -46,7 +50,7 @@ public class App {
 //      show all users in the db
         get("/allUsers", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Users> users = Users.all();
+            List<User> users = User.all();
             model.put("user", users);
             return new ModelAndView(model, "allUsers.hbs");
         }, new HandlebarsTemplateEngine());
@@ -61,7 +65,7 @@ public class App {
             String dName = request.queryParams("dName");
             String description = request.queryParams("description");
             Integer employeeNo = Integer.parseInt(request.queryParams("employeeNo"));
-            Departments newDept = new Departments(dName,description,employeeNo);
+            Department newDept = new Department(dName,description,employeeNo);
             model.put("department", newDept);
             newDept.save();
             return new ModelAndView(model, "success.hbs");
@@ -69,7 +73,7 @@ public class App {
 //        show all departments in the db
         get("/allDepts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
+            List<Department> departments = Department.all();
             model.put("departments", departments);
             return new ModelAndView(model, "allDepts.hbs");
         }, new HandlebarsTemplateEngine());
@@ -92,7 +96,7 @@ public class App {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<GeneralNews> generalNews = GeneralNews.all();
-            List<DepartmentNews> departmentNews = DepartmentNews.all();
+            List<NewsDepartment> departmentNews =NewsDepartment.all();
             model.put("departmentNews", departmentNews);
             model.put("generalNews", generalNews);
             return new ModelAndView(model, "news.hbs");
@@ -100,7 +104,7 @@ public class App {
 //        show form to enter dept related news.
         get("/deptNews/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            List<Departments> departments = Departments.all();
+            List<Department> departments = Department.all();
             model.put("departments", departments);
             return new ModelAndView(model, "deptNews-form.hbs");
         }, new HandlebarsTemplateEngine());
@@ -110,7 +114,7 @@ public class App {
             String title = request.queryParams("title");
             String content = request.queryParams("content");
             String dName = request.queryParams("dName");
-            DepartmentNews departmentNews = new DepartmentNews(title,content,dName);
+            NewsDepartment departmentNews = new NewsDepartment(title,content,dName);
             model.put("departmentNews", departmentNews);
             departmentNews.save();
             return new ModelAndView(model, "success.hbs");
