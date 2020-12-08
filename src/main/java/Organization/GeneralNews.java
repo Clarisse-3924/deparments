@@ -7,10 +7,10 @@ import java.util.List;
 public class GeneralNews extends News {
     public static final String DATABASE_TYPE = "General";
 
-    public GeneralNews(String title, String content, String dName) {
+    public GeneralNews(String title, String content, String departmentName) {
         this.title = title;
         this.content = content;
-        this.dName = dName;
+        this.departmentName = departmentName;
         type = DATABASE_TYPE;
     }
 

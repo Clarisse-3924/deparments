@@ -8,37 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
-    private String dName;
+    private String departmentName;
     private String description;
-    private int employeeNo;
+    private int NumberOfEmployee;
     private int id;
-    public Department(String dName, String description, int employeeNo){
-        this.dName = dName;
+    public Department(String departmentName, String description, int NumberOfEmployee){
+        this.departmentName = departmentName;
         this.description = description;
-        this.employeeNo = employeeNo;
+        this.NumberOfEmployee = NumberOfEmployee;
     }
 
-    public String getDName() {
-        return dName;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public int getEmployeeNo() {
-        return employeeNo;
+    public int getNumberOfEmployee() {
+        return NumberOfEmployee;
     }
     public int getId() {
         return id;
     }
     public void save() {
         try(Connection con = Database.sql2o.open()) {
-            String sql = "INSERT INTO departments (dName, description, employeeNo) VALUES (:dName, :description, :employeeNo)";
+            String sql = "INSERT INTO departments (departmentName, description, NumberOfEmployee) VALUES (:departmentName, :description, :NumberOfEmployee)";
             this.id = (int) con.createQuery(sql, true)
-                    .addParameter("dName", this.dName)
+                    .addParameter("departmentName", this.departmentName)
                     .addParameter("description", this.description)
-                    .addParameter("employeeNo", this.employeeNo)
+                    .addParameter("NumberOfEmployee", this.NumberOfEmployee)
                     .executeUpdate()
                     .getKey();
         }
@@ -62,7 +62,7 @@ public class Department {
         try(Connection con = Database.sql2o.open()) {
             String sql = "SELECT * FROM users where department=:dName";
             return con.createQuery(sql)
-                    .addParameter("dName", this.dName)
+                    .addParameter("departmentName", this.departmentName)
                     .executeAndFetch(Authentication.User.class);
         }
     }
@@ -72,13 +72,13 @@ public class Department {
         try(Connection con = Database.sql2o.open()) {
             String sqlGeneral = "SELECT * FROM news where dName=:dName AND type='General';";
             List<GeneralNews> generalNews = con.createQuery(sqlGeneral)
-                    .addParameter("dName", this.dName)
+                    .addParameter("departmentName", this.departmentName)
                     .executeAndFetch(GeneralNews.class);
             allNews.addAll(generalNews);
 
-            String sqlDept = "SELECT * FROM news news where dName=:dName AND type='Department';";
+            String sqlDept = "SELECT * FROM news news where departmentName=:departmentName AND type='Department';";
             List<NewsDepartment > departmentNews = con.createQuery(sqlDept)
-                    .addParameter("dName", this.dName)
+                    .addParameter("departmentName", this.departmentName)
                     .executeAndFetch(NewsDepartment .class);
             allNews.addAll(departmentNews);
         }

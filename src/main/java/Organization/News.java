@@ -5,7 +5,7 @@ import org.sql2o.Connection;
 public abstract class News  {
     public String title;
     public String content;
-    public String DepartmentName ;
+    public String departmentName ;
     public int id;
     public String type;
 
@@ -18,7 +18,7 @@ public abstract class News  {
     }
 
     public String getDepartmentName () {
-        return DepartmentName ;
+        return departmentName ;
     }
     public int getId() {
         return id;
@@ -29,7 +29,7 @@ public abstract class News  {
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("title", this.title)
                     .addParameter("content", this.content)
-                    .addParameter("departmentName ", this.DepartmentName )
+                    .addParameter("departmentName ", this.departmentName )
                     .addParameter("type", this.type)
                     .executeUpdate()
                     .getKey();

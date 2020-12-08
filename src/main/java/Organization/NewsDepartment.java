@@ -9,10 +9,10 @@ import java.util.List;
 public class NewsDepartment extends News {
     public static final String DATABASE_TYPE = "Department";
 
-    public NewsDepartment(String title, String content, String dName){
+    public NewsDepartment(String title, String content, String departmentName){
         this.title = title;
         this.content = content;
-        this.dName = dName;
+        this.departmentName = departmentName;
         type = DATABASE_TYPE;
     }
     public static List<NewsDepartment> all() {

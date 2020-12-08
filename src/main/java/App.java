@@ -33,54 +33,53 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Department> departments = Department.all();
             model.put("departments", departments);
-            return new ModelAndView(model, "newUser-form.hbs");
+            return new ModelAndView(model, "newUserForm.hbs");
         }, new HandlebarsTemplateEngine());
 //      post the user entered
         post("/user/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String fName = request.queryParams("fName");
-            String sName = request.queryParams("sName");
+            String name = request.queryParams("name");
             String position = request.queryParams("position");
             String department = request.queryParams("department");
-            User newUser = new User(fName,sName,position,department);
+            User newUser = new User(name,position,department);
             model.put("user", newUser);
             newUser.save();
-            return new ModelAndView(model, "success.hbs");
+            return new ModelAndView(model, "newUserForm.hbs");
         }, new HandlebarsTemplateEngine());
 //      show all users in the db
         get("/allUsers", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            List<User> users = User.all();
-            model.put("user", users);
-            return new ModelAndView(model, "allUsers.hbs");
+            List<User> user = User.all();
+            model.put("user", user);
+            return new ModelAndView(model, "User.hbs");
         }, new HandlebarsTemplateEngine());
 //      show new department form
         get("/dept/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "newDept-form.hbs");
+            return new ModelAndView(model, "newDepartmentform.hbs");
         }, new HandlebarsTemplateEngine());
 //        post the department entered
         post("/dept/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String dName = request.queryParams("dName");
+            String departmentName = request.queryParams("departmentName");
             String description = request.queryParams("description");
             Integer employeeNo = Integer.parseInt(request.queryParams("employeeNo"));
-            Department newDept = new Department(dName,description,employeeNo);
+            Department newDept = new Department(departmentName,description,employeeNo);
             model.put("department", newDept);
             newDept.save();
-            return new ModelAndView(model, "success.hbs");
+            return new ModelAndView(model, "newDepartmentform.hbs");
         }, new HandlebarsTemplateEngine());
 //        show all departments in the db
         get("/allDepts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Department> departments = Department.all();
             model.put("departments", departments);
-            return new ModelAndView(model, "allDepts.hbs");
+            return new ModelAndView(model, "Departments.hbs");
         }, new HandlebarsTemplateEngine());
 //        form for general news posting
         get("/generalNews/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "generalNews-form.hbs");
+            return new ModelAndView(model, "generalNewsform.hbs");
         }, new HandlebarsTemplateEngine());
         post("/generalNews/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
@@ -90,14 +89,14 @@ public class App {
             GeneralNews generalNews = new GeneralNews(title,content,dName);
             model.put("generalNews", generalNews);
             generalNews.save();
-            return new ModelAndView(model, "success.hbs");
+            return new ModelAndView(model, "generalNewsform.hbs");
         }, new HandlebarsTemplateEngine());
 //        show all news
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<GeneralNews> generalNews = GeneralNews.all();
             List<NewsDepartment> departmentNews =NewsDepartment.all();
-            model.put("departmentNews", departmentNews);
+            model.put("Newsdepartment", departmentNews);
             model.put("generalNews", generalNews);
             return new ModelAndView(model, "news.hbs");
         }, new HandlebarsTemplateEngine());
@@ -106,18 +105,18 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             List<Department> departments = Department.all();
             model.put("departments", departments);
-            return new ModelAndView(model, "deptNews-form.hbs");
+            return new ModelAndView(model, "newDepartmentform.hbs");
         }, new HandlebarsTemplateEngine());
 //        post the info got from form and save to db
         post("/deptNews/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             String title = request.queryParams("title");
             String content = request.queryParams("content");
-            String dName = request.queryParams("dName");
+            String dName = request.queryParams("departmentName");
             NewsDepartment departmentNews = new NewsDepartment(title,content,dName);
             model.put("departmentNews", departmentNews);
             departmentNews.save();
-            return new ModelAndView(model, "success.hbs");
+            return new ModelAndView(model, "newDepartmentform.hbs");
         }, new HandlebarsTemplateEngine());
 
         //      show all users in individual department

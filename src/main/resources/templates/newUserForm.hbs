@@ -2,12 +2,8 @@
     <h3>Add a new User!</h3>
     <form action="/user/new" method="post">
         <div class="form-group">
-            <label for="fName">First name:</label><br>
-            <input class="form-control" id="fName" name="fName" type="text"><br>
-        </div>
-        <div class="form-group">
-            <label for="sName">Second name:</label><br>
-            <input class="form-control" id="sName" name="sName" type="text"><br>
+            <label for="name">First name:</label><br>
+            <input class="form-control" id="name" name="name" type="text"><br>
         </div>
         <div class="form-group">
             <label for="position">Position:</label><br>
@@ -17,7 +13,7 @@
             <label for="department">Department name:</label><br>
             <select class="form-control" name="department">
                 {{#each departments}}
-                    <option>{{dName}}</option>
+                    <option>{{departmentName}}</option>
                 {{/each}}
             </select>
         </div>

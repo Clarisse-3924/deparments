@@ -5,24 +5,18 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class User {
-    private String fName;
-    private String sName;
+    private String name;
     private String position;
     private String department;
     private int id;
-    public User(String fName, String sName, String position, String department){
-        this.fName = fName;
-        this.sName = sName;
+    public User(String name, String position, String department){
+        this.name = name;
         this.position = position;
         this.department = department;
     }
 
-    public String getFName() {
-        return fName;
-    }
-
-    public String getSName() {
-        return sName;
+    public String getName() {
+        return name;
     }
 
     public String getPosition() {
@@ -37,10 +31,9 @@ public class User {
     }
     public void save() {
         try(Connection con = Database.sql2o.open()) {
-            String sql = "INSERT INTO users (fName, sName, position, department) VALUES (:fName, :sName, :position, :department)";
+            String sql = "INSERT INTO users (name, position, department) VALUES (:name, :position, :department)";
             this.id= (int) con.createQuery(sql, true)
-                    .addParameter("fName", this.fName)
-                    .addParameter("sName", this.sName)
+                    .addParameter("name", this.name)
                     .addParameter("position", this.position)
                     .addParameter("department", this.department)
                     .executeUpdate()
