@@ -5,7 +5,7 @@ import org.sql2o.Connection;
 public abstract class News  {
     public String title;
     public String content;
-    public String departmentName ;
+    public String departmentname ;
     public int id;
     public String type;
 
@@ -17,19 +17,19 @@ public abstract class News  {
         return content;
     }
 
-    public String getDepartmentName () {
-        return departmentName ;
+    public String getDepartmentname () {
+        return departmentname ;
     }
     public int getId() {
         return id;
     }
     public void save() {
         try(Connection con = Database.sql2o.open()) {
-            String sql = "INSERT INTO news (title, content,departmentName , type) VALUES (:title, :content, :departmentName, :type)";
+            String sql = "INSERT INTO news (title, content,departmentname , type) VALUES (:title, :content, :departmentName, :type)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("title", this.title)
                     .addParameter("content", this.content)
-                    .addParameter("departmentName ", this.departmentName )
+                    .addParameter("departmentname ", this.departmentname )
                     .addParameter("type", this.type)
                     .executeUpdate()
                     .getKey();

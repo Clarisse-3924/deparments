@@ -1,6 +1,5 @@
 {{#partial "content"}}
-    <h3>Add a new User!</h3>
-    <form action="/user/new" method="post">
+    <form action="/user/new" method="post" id="colors">
         <div class="form-group">
             <label for="name">First name:</label><br>
             <input class="form-control" id="name" name="name" type="text"><br>
@@ -13,7 +12,7 @@
             <label for="department">Department name:</label><br>
             <select class="form-control" name="department">
                 {{#each departments}}
-                    <option>{{departmentName}}</option>
+                    <option>{{departmentname}}</option>
                 {{/each}}
             </select>
         </div>
@@ -23,10 +22,5 @@
     </form>
 {{/partial}}
 <style>
-    body{
-        background-image: url("http://www.gsfdcy.com/data/img/20/1338105-company-wallpaper.jpg");
-        background-repeat: no-repeat;
-        background-size:cover;
-    }
 </style>
 {{> layout.hbs}}
