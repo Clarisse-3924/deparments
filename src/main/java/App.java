@@ -61,10 +61,10 @@ public class App {
 //        post the department entered
         post("/dept/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            String departmentName = request.queryParams("departmentName");
+            String departmentname = request.queryParams("departmentname");
             String description = request.queryParams("description");
-            Integer employeeNo = Integer.parseInt(request.queryParams("employeeNo"));
-            Department newDept = new Department(departmentName,description,employeeNo);
+            Integer numberofemployee = Integer.parseInt(request.queryParams("numberofemployee"));
+            Department newDept = new Department(departmentname,description,numberofemployee);
             model.put("department", newDept);
             newDept.save();
             return new ModelAndView(model, "newDepartmentform.hbs");
@@ -85,8 +85,8 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             String title = request.queryParams("title");
             String content = request.queryParams("content");
-            String dName = "General News";
-            GeneralNews generalNews = new GeneralNews(title,content,dName);
+            String departmentname = "General News";
+            GeneralNews generalNews = new GeneralNews(title,content,departmentname);
             model.put("generalNews", generalNews);
             generalNews.save();
             return new ModelAndView(model, "generalNewsform.hbs");
@@ -112,8 +112,8 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             String title = request.queryParams("title");
             String content = request.queryParams("content");
-            String dName = request.queryParams("departmentName");
-            NewsDepartment departmentNews = new NewsDepartment(title,content,dName);
+            String departmentname = request.queryParams("departmentname");
+            NewsDepartment departmentNews = new NewsDepartment(title,content,departmentname);
             model.put("departmentNews", departmentNews);
             departmentNews.save();
             return new ModelAndView(model, "newDepartmentform.hbs");
