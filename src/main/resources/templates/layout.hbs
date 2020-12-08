@@ -3,6 +3,13 @@
 <head>
     <title>{{#block "title"}}News_portal{{/block}}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet"href="/css/style.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <ul style="background-color:black;" class="nav justify-content-center">
@@ -16,6 +23,18 @@
         <a id="nav" class="nav-link" href="/allUsers">USERS</a>
     </li>
 </ul>
+<div class="navbar " style="padding-bottom: 0px;">
+    <nav>
+        <ul class="nav" style="padding-top: 0px">
+            <li><a class="nav-link" href="/">Home</a></li>
+            <li style="color:orange;font-size:20px;">CREATE:</li>
+            <li><a class="nav-link" href="/create/ranger">Ranger</a></li>
+            <li><a class="nav-link" href="/create/location">Location</a></li>
+            <li><a class="nav-link" href=/create/animal>Animal</a></li>
+            <li><a class="nav-link" href="/create/sighting">Sighting</a></li>
+        </ul>
+    </nav>
+</div>
 <div class="container">
     <!--begin main template-->
     <div class="page-header">
