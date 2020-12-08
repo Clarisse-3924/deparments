@@ -5,6 +5,17 @@ background-repeat: no-repeat;
 background-size:cover;
 
 }
+ #all{
+        display:flex;
+        flex-direction:wrap;
+        justify-content:space-around;
+    }
+    body{
+        text-align:center;
+        background-image: url("http://getwallpapers.com/wallpaper/full/3/9/7/93962.jpg");
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
 
 hr{
     background-color:black;
