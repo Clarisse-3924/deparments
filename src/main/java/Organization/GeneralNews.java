@@ -5,6 +5,7 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class GeneralNews extends News {
+
     public static final String DATABASE_TYPE = "General";
 
     public GeneralNews(String title, String content, String departmentname) {

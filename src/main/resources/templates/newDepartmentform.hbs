@@ -1,21 +1,25 @@
 {{#partial "content"}}
-    <form action="/dept/new" method="post" id="colors">
+    <h3 style="color:white;">Department news!</h3>
+    <form action="/deptNews/new" method="post">
         <div class="form-group">
-            <label for="departmentname">Department name:</label><br>
-            <input class="form-control" id="departmentname" name="departmentname" type="text"><br>
+            <label style="color:white;" for="title">Post title:</label><br>
+            <input class="form-control" id="title" name="title" type="text"><br>
         </div>
         <div class="form-group">
-            <label for="description"> Description:</label><br>
-            <textarea class="form-control" id="description" name="description" type="text" rows="3"></textarea><br>
+            <label style="color:white;" for="content">Post content:</label><br>
+            <textarea class="form-control" id="content" name="content" rows="4" type="text"></textarea><br>
         </div>
         <div class="form-group">
-            <label for="numberofemployee">Employee number:</label><br>
-            <input class="form-control" id="numberofemployee" name="numberofemployee" type="number"><br>
+            <label style="color:white;" for="dName">Department name:</label><br>
+            <select class="form-control" name="departmentname">
+                {{#each departments}}
+                    <option>{{departmentname}}</option>
+                {{/each}}
+            </select>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-light">Create</button>
+            <button type="submit" class="btn btn-dark">POST</button>
         </div>
     </form>
 {{/partial}}
-
 {{> layout.hbs}}

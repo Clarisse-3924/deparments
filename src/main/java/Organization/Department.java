@@ -32,7 +32,7 @@ public class Department {
     public int getId() {
         return id;
     }
-    public void save() {
+    public  void save() {
         try(Connection con = Database.sql2o.open()) {
             String sql = "INSERT INTO departments (departmentname, description, NumberOfEmployee) VALUES (:departmentname, :description, :NumberOfEmployee)";
             this.id = (int) con.createQuery(sql, true)

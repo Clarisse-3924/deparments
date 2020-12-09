@@ -29,7 +29,7 @@ public class User {
     public int getId() {
         return id;
     }
-    public void save() {
+    public  void save() {
         try(Connection con = Database.sql2o.open()) {
             String sql = "INSERT INTO users (name, position, department) VALUES (:name, :position, :department)";
             this.id= (int) con.createQuery(sql, true)

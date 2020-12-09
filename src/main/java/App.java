@@ -1,14 +1,14 @@
-import Organization.Department;
-import Organization.GeneralNews;
-import Organization.NewsDepartment;
-import Organization.User;
+import Organization.*;
 import spark.ModelAndView;
+import com.google.gson.Gson;
+
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static Organization.Database.sql2o;
 import static spark.Spark.*;
 
 public class App {
@@ -21,21 +21,22 @@ public class App {
     }
     public static void main(String[] args) {
 
+        Gson gson = new Gson();
+
+
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-//      Making a home pathway
-//        get("/",(request, response) ->{
-//            Map<String, Object> model = new HashMap<>();
-//            return new ModelAndView(model, "news.hbs");
-//        }, new HandlebarsTemplateEngine() );
-//        create a new user form
+
+
+
+
+
         get("/user/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
             List<Department> departments = Department.all();
             model.put("departments", departments);
             return new ModelAndView(model, "newUserForm.hbs");
         }, new HandlebarsTemplateEngine());
-//      post the user entered
         post("/user/new", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             String name = request.queryParams("name");
@@ -119,13 +120,24 @@ public class App {
             return new ModelAndView(model, "newDepartmentform.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //      show all users in individual department
-//        get("/allUsersDept", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            List<Users> userInDept = Departments.getUsers();
-//            model.put("userInDept", userInDept);
-//            return new ModelAndView(model, "allUsersDept.hbs");
-//
-//        }, new HandlebarsTemplateEngine());
+
+
+        /*post("/usernew/new", "application/json", (req, res) -> {
+            User user = gson.fromJson(req.body(), User.class);
+            User.save();
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(user);
+        });
+
+
+        post("/departmentnew/new", "application/json", (req, res) -> {
+            Department department = gson.fromJson(req.body(), Department.class);
+            Department.save();
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(department);
+        });*/
     }
+
 }
