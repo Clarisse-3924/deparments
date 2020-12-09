@@ -7,6 +7,7 @@ import java.util.List;
 
 
 public class NewsDepartment extends News {
+
     public static final String DATABASE_TYPE = "Department";
 
     public NewsDepartment(String title, String content, String departmentname){

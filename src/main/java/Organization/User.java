@@ -5,6 +5,7 @@ import org.sql2o.Connection;
 import java.util.List;
 
 public class User {
+
     private String name;
     private String position;
     private String department;
