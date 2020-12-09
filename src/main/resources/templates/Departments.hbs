@@ -1,7 +1,5 @@
 {{#partial "content"}}
-    <div>
-        <a style="background-color:saddlebrown;" id="button" href="/dept/new" class="btn btn-outline-secondary btn-lg" role="button">ADD DEPARTMENT</a><br><br><br>
-    </div>
+<h3>View created departments</h3>
     {{#if departments}}
         <div id="all">
         {{#each departments }}
@@ -16,9 +14,11 @@
     {{else}}
             <h4>No Departments registered yet!</h4>
         </div>
-    {{/if}}
-{{/partial}}
-<style>
 
-</style>
+    {{/if}}
+    <div>
+        <a id="button" href="/dept/new" class="btn btn-success" role="button">Add department</a><br><br><br>
+    </div>
+{{/partial}}
+
 {{> layout.hbs}}

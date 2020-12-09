@@ -2,36 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a style="color:black;" id="button" href="/generalNews/new" class="btn btn-dark btn-lg" role="button">Post General company news</a><br><br><br>
-            </div>
-            <div class="col-md-6">
-                <a style="color:black;" id="button" href="/deptNews/new" class="btn btn-dark btn-lg" role="button">Post Individual department news</a><br><br>
+                <a style="color:black;" id="button" href="/deptNews/new" class="btn btn-dark btn-lg" role="button">general news</a><br><br>
             </div>
         </div>
     </div>
     <div class="container">
-        <h2 style="text-align:center; margin:3%;"><strong>ALL COMPANY NEWS </strong></h2>
-        <div class="row">
-            <div class="col-md-6">
-                {{#if generalNews}}
-                    <h3 style="text-decoration:underline; padding-bottom:2%; margin-bottom:3%;">GENERAL NEWS</h3>
-                    {{#each generalNews }}
-                        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                            <div style="color:black;" class="card-header">{{ departmentname }}</div>
-                            <div class="card-body">
-                                <h5 style="color:black;" class="card-title">{{ title }}</h5>
-                                <p style="color:black;" class="card-text">{{ content }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-                {{else}}
-                <h1>No general news posted yet!</h1>
-                {{/if}}
-            </div>
             <div class="col-md-6">
                 {{#if departmentNews}}
-                    <h3 style="text-decoration:underline; padding-bottom:2%; margin-bottom:3%;">DEPARTMENT NEWS!</h3>
+                    <h3 style="text-decoration:underline; padding-bottom:2%; margin-bottom:3%;">general news</h3>
                     {{#each departmentNews}}
                         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                             <div style="color:black;" class="card-header">{{ departmentname }}</div>

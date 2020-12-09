@@ -26,7 +26,7 @@ public abstract class News  {
     }
     public void save() {
         try(Connection con = Database.sql2o.open()) {
-            String sql = "INSERT INTO news (title, content,departmentname , type) VALUES (:title, :content, :departmentname, :type)";
+            String sql = "INSERT INTO news (title, content, departmentname , type) VALUES (:title, :content, :departmentname, :type)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("title", this.title)
                     .addParameter("content", this.content)

@@ -1,8 +1,4 @@
 
-body{
-background:url("https://gorilla-adventuretours.com/wp-content/uploads/2019/09/akagera.jpg");
-background-repeat: no-repeat;
-background-size:cover;
 
 }
  #all{
@@ -10,12 +6,8 @@ background-size:cover;
         flex-direction:wrap;
         justify-content:space-around;
     }
-    body{
-        text-align:center;
-        background-image: url("http://getwallpapers.com/wallpaper/full/3/9/7/93962.jpg");
-        background-repeat: no-repeat;
-        background-size:cover;
-    }
+body{
+background-color:grey;}
 
 hr{
     background-color:black;
