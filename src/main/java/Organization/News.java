@@ -3,6 +3,7 @@ package Organization;
 import org.sql2o.Connection;
 
 public abstract class News  {
+
     public String title;
     public String content;
     public String departmentname ;

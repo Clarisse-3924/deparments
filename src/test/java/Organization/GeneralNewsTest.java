@@ -11,17 +11,17 @@ public class GeneralNewsTest {
         assertEquals(true, testgeneralnews instanceof GeneralNews);
     }
     @Test
-    public void getTitle_animalInstantiatesWithTitle_news() {
+    public void getTitle_contentlInstantiatesWithTitle_news() {
         GeneralNews testgeneralnews = new GeneralNews("news", "building house","finance");
         assertEquals("news", testgeneralnews.getTitle());
     }
     @Test
-    public void getContent_animalInstantiatesWithcontent_String() {
+    public void getContent_contentInstantiatesWithcontent_String() {
         GeneralNews generalnews = new GeneralNews("news", "building","finance");
         assertEquals("bluiding", generalnews.getContent());
     }
     @Test
-    public void getDepartmentname_animalInstantiatesWithDepartmentname_String() {
+    public void getDepartmentname_departmentnameInstantiatesWithDepartmentname_String() {
         GeneralNews generalnews = new GeneralNews("news", "building","finance");
         assertEquals("bluiding", generalnews.getDepartmentname());
     }
